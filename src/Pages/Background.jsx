@@ -6,30 +6,29 @@ import { useNavigate } from "react-router";
 const Background = () => {
   const [state, setState] = useState({
     category: "",
-    experience: "",   
+    experience: "",
     location: "",
   });
-  
+
   const navigate = useNavigate();
- 
+
   const handleChange = (e) => {
     setState((state) => ({
       ...state,
       [e.target.name]: e.target.value,
     }));
-  }; 
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(state)
-   
+    console.log(state);
   };
 
   const addBackground = async (background) => {
     //TODO
   };
   return (
-    <div className="container" style={{paddingTop: "10em", width: "30%"}}>
+    <div className="container" style={{ paddingTop: "10em", width: "30%" }}>
       <Form onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Form.Group required as={Col} controlId="formGridCity">
@@ -43,10 +42,10 @@ const Background = () => {
               <option disabled value="Choose...">
                 Choose...
               </option>
-              <option value="Software/IT">
-              Software/IT
+              <option value="Software/IT">Software/IT</option>
+              <option value="Electrical and Electronics">
+                Electrical and Electronics
               </option>
-              <option value="Electrical and Electronics">Electrical and Electronics</option>
               <option value="Accounting">Accounting</option>
               <option value="Education">Education</option>
               <option value="Textile and Garment">Textile and Garment</option>
@@ -69,30 +68,19 @@ const Background = () => {
               <option disabled value="Choose...">
                 Choose ...
               </option>
-              <option value=" Ha Noi" >
-               Ha Noi
-              </option>
-              <option value="Ho Chi Minh" >
-                Ho Chi Minh
-              </option>
-              <option value="Da Nang" >
-                Da Nang
-              </option>
-              <option value=" Hue" >
-               Hue
-              </option>             
+              <option value=" Ha Noi">Ha Noi</option>
+              <option value="Ho Chi Minh">Ho Chi Minh</option>
+              <option value="Da Nang">Da Nang</option>
+              <option value=" Hue">Hue</option>
             </Form.Control>
           </Form.Group>
-          
         </Row>
-        
-       
 
         <Row className="mb-3">
-          
-
           <Form.Group as={Col} controlId="formGridState">
-            <Form.Label style={{ fontWeight: "bold" }}>Experience level</Form.Label>
+            <Form.Label style={{ fontWeight: "bold" }}>
+              Experience level
+            </Form.Label>
             <Form.Control
               name="jobType"
               onChange={handleChange}

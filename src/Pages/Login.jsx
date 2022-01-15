@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,7 +13,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import MessageModal from "../../Components/Modals/MessageModal";
+import MessageModal from "../Components/Modals/MessageModal";
 import { ClipLoader } from "react-spinners";
 
 const theme = createTheme();
@@ -25,7 +25,7 @@ const Login = () => {
 
   // useEffect(() => setShowPinAlert(true), []);
   const navigate = useNavigate();
-
+  const params = useParams();
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -33,7 +33,7 @@ const Login = () => {
       setLoading(true);
       setInterval(() => {
         setLoading(false);
-        navigate("/");
+        navigate("/dashboard");
       }, 1000);
     }
   };
@@ -186,7 +186,11 @@ const Login = () => {
               )}
             </Button>
             <center>
-              <Link href="/signup" variant="body2" style={{ float: "right" }}>
+              <Link
+                href={`/signup/${params.role}`}
+                variant="body2"
+                style={{ float: "right" }}
+              >
                 {"Haven't had an account?"}
               </Link>
             </center>

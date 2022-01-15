@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,19 +13,35 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import MessageModal from "../../Components/Modals/MessageModal";
+import MessageModal from "../Components/Modals/MessageModal";
 import { ClipLoader } from "react-spinners";
-
+import { send } from "emailjs-com";
+import {
+  EMAIL_SERVICE_ID,
+  EMAIL_TEMPLATE_ID,
+  EMAIL_USER_ID,
+} from "../app.properties";
 const theme = createTheme();
 
 const SignUp = () => {
   const [user, setUser] = useState({ phone: "", email: "" });
+  const [toSend, setToSend] = useState({
+    from_name: "",
+    to_name: "",
+    message: "",
+    reply_to: "",
+  });
   const [error, setError] = useState({ phone: "", email: "" });
   const [showPinAlert, setShowPinAlert] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => setShowPinAlert(true), []);
+  useEffect(() => {
+    setShowPinAlert(true);
+    console.log(params.role);
+  }, []);
+
   const navigate = useNavigate();
+  const params = useParams();
 
   const closePinAlert = () => setShowPinAlert(false);
   const handleSubmit = (event) => {
@@ -35,7 +51,8 @@ const SignUp = () => {
       setLoading(true);
       setInterval(() => {
         setLoading(false);
-        navigate("/login");
+
+        navigate(`/login/${params.role}`);
       }, 1000);
     }
   };
@@ -53,8 +70,6 @@ const SignUp = () => {
 
       //validate Phone
       validatePhone(event);
-
-      //validateEmail
     }
   };
 
@@ -202,7 +217,11 @@ const SignUp = () => {
               )}
             </Button>
 
-            <Link href="/login" variant="body2" style={{ float: "right" }}>
+            <Link
+              href={`/login/${params.role}`}
+              variant="body2"
+              style={{ float: "right" }}
+            >
               {"Already have an account? Go to Login"}
             </Link>
           </Box>

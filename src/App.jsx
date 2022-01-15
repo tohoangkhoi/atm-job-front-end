@@ -6,16 +6,19 @@ import Home from "./Pages/Home";
 import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
 import Background from "./Pages/Background";
+import LandingPage from "./Pages/LandingPage";
+import CreatePost from "./Pages/CreatePost";
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
-          <Route exact path="/signup" element={<SignUp />} />
-          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup/:role" element={<SignUp />} />
+          <Route exact path="/login/:role" element={<Login />} />
           <Route exact path="/background" element={<Background />} />
-          <Route exact path="/dashboard" element={<Home />} />
+          <Route exact path="/dashboard/:role" element={<Home />} />
+          <Route exact path="/createJob" element={<CreatePost />} />
         </Routes>
       </Router>
     </div>
