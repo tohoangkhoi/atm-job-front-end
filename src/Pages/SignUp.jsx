@@ -51,7 +51,6 @@ const SignUp = () => {
       setLoading(true);
       setInterval(() => {
         setLoading(false);
-
         navigate(`/login/${params.role}`);
       }, 1000);
     }

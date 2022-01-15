@@ -33,7 +33,7 @@ const Login = () => {
       setLoading(true);
       setInterval(() => {
         setLoading(false);
-        navigate("/dashboard");
+        navigate(`/dashboard/employer`);
       }, 1000);
     }
   };
