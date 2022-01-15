@@ -15,13 +15,30 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import AppNavBar from "../Components/AppNavBar";
-import JobCard from "../Components/JobCard";
+import AppNavBar from "../../Components/AppNavBar";
+import JobCard from "../../Components/JobCard";
+import axios from "axios";
+import { API_URL } from "../../app.properties";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
 const Home = () => {
+  const [job, setJob] = useState([]);
+  useEffect(() => {
+    getJobs();
+  }, []);
+
+  useEffect(() => console.log(job), [job]);
+  const getJobs = async () => {
+    await axios
+      .get(API_URL + "jobs")
+      .then((result) => setJob(result.data.content))
+      .catch((err) => console.log(err.response.data));
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -50,7 +67,11 @@ const Home = () => {
               align="center"
               color="text.secondary"
               paragraph
-              style={{ fontFamily: "Helvetica", fontSize: "small" }}
+              style={{
+                fontFamily: "Helvetica",
+                fontSize: "small",
+                fontStyle: "italic",
+              }}
             >
               Inspired by Den Vau top hit “Bring Money To Mom" - Developed by
               MAI DUC MINH
@@ -62,16 +83,16 @@ const Home = () => {
               justifyContent="center"
             >
               <Button variant="contained">Main call to action</Button>
-              <Button variant="outlined">Secondary action</Button>
+              <Button variant="outlined">Recommendation</Button>
             </Stack>
           </Container>
         </Box>
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <JobCard />
+            {job?.map((card, id) => (
+              <Grid item key={id} xs={12} sm={6} md={4}>
+                <JobCard info={card} />
               </Grid>
             ))}
           </Grid>

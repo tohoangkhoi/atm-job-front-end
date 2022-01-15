@@ -1,14 +1,17 @@
 import { AppBar, Toolbar, Typography } from "@mui/material";
-import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+import WorkIcon from "@mui/icons-material/Work";
 import React from "react";
 
 const AppNavBar = () => {
   return (
     <>
-      <AppBar position="relative">
+      <AppBar
+        style={{ position: "sticky", zIndex: "1", top: "0" }}
+        position="relative"
+      >
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            <PhotoCameraIcon sx={{ mr: 2 }} />
+            <WorkIcon sx={{ mr: 2 }} />
             ATM JOB
           </Typography>
         </Toolbar>

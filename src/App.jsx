@@ -5,14 +5,17 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
+import Background from "./Pages/Background";
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/background" element={<Background />} />
+          <Route exact path="/dashboard" element={<Home />} />
         </Routes>
       </Router>
     </div>
